@@ -24,9 +24,12 @@ plugins:
           site_name: PrepPipe Compiler
   - privacy
   - offline
-  - search
-  - git-revision-date-localized:
-      type: iso_date
+  # git-revision-date-localized 需要 search 插件支持
+  # 中文搜索目前效果不好，暂时禁用
+  # - search
+  # 等这个插件支持 locale 字符串长于两个字母时再启用，现在 zh-Hant 会报错
+  # - git-revision-date-localized:
+  #    type: iso_date
 
 
 nav:
