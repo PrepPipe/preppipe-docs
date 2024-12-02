@@ -8,6 +8,16 @@ theme:
     primary: cyan
   language: 'zh'
 
+
+markdown_extensions:
+  - admonition:
+  - pymdownx.details:
+  - pymdownx.superfences: # 添加 mermaid 支持，用来画图
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
 plugins:
   - i18n:
       docs_structure: folder
@@ -16,12 +26,30 @@ plugins:
           default: true
           name: 简体中文
           site_name: 语涵编译器
+          nav_translations:
+            indexpage: 首页
+            intro: 简介
+            frontend: 剧本格式（前端）
+            middleend: 分析优化工具（中端）
+            backend: 引擎支持（后端）
         - locale: zh-Hant
           name: 繁體中文
           site_name: 語涵編譯器
+          nav_translations:
+            indexpage: 首頁
+            intro: 簡介
+            frontend: 劇本格式（前端）
+            middleend: 分析優化工具（中端）
+            backend: 引擎支持（後端）
         - locale: en
           name: English
           site_name: PrepPipe Compiler
+          nav_translations:
+            indexpage: Home
+            intro: Introduction
+            frontend: Script Format (Frontend)
+            middleend: Analysis and Opt Tools (Middleend)
+            backend: Engine Support (Backend)
   - privacy
   - offline
   # git-revision-date-localized 需要 search 插件支持
@@ -33,6 +61,16 @@ plugins:
 
 
 nav:
-  - 'index.md'
-  - 'getting_started.md'
-  - 'documentation.md'
+  - indexpage: 'index.md'
+  - intro:
+    - "intro/why_preppipe.md"
+    - "intro/functionality.md"
+  - frontend:
+    - "script/overview.md"
+  - middleend:
+    - "middleend/overview.md"
+    - "middleend/assetusage.md"
+  - backend:
+    - "engine/renpy.md"
+    - "engine/webgal.md"
+
