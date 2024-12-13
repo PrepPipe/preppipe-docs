@@ -30,6 +30,7 @@ plugins:
             indexpage: 首页
             intro: 简介
             frontend: 剧本格式（前端）
+            frontendcmddocs: 命令列表（自动生成）
             middleend: 分析优化工具（中端）
             backend: 引擎支持（后端）
         - locale: zh-Hant
@@ -39,6 +40,7 @@ plugins:
             indexpage: 首頁
             intro: 簡介
             frontend: 劇本格式（前端）
+            frontendcmddocs: 命令列表（自動生成）
             middleend: 分析優化工具（中端）
             backend: 引擎支持（後端）
         - locale: en
@@ -48,6 +50,7 @@ plugins:
             indexpage: Home
             intro: Introduction
             frontend: Script Format (Frontend)
+            frontendcmddocs: Commands Listing (Auto-generated)
             middleend: Analysis and Opt Tools (Middleend)
             backend: Engine Support (Backend)
   - privacy
@@ -67,6 +70,7 @@ nav:
     - "intro/functionality.md"
   - frontend:
     - "script/overview.md"
+    - frontendcmddocs: "script/cmddocs.md"
   - middleend:
     - "middleend/overview.md"
     - "middleend/assetusage.md"

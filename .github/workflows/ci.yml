@@ -29,7 +29,18 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '>= 3.10'
+
+      - name: "Download main program"
+        id: download_main
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: "PrepPipe/preppipe-python"
+          tag: "latest-main"
+          fileName: "preppipe-*-py3-none-any.whl"
+          tarBall: false
+          zipBall: false
+          out-file-path: "."
 
       - name: Install dependencies
         run: |
@@ -37,6 +48,16 @@ jobs:
           python3 -m pip install mkdocs
           python3 -m pip install mkdocs-material
           python3 -m pip install mkdocs-static-i18n[material]
+
+      - name: Install main program
+        run: |
+          python3 -m pip install $(ls preppipe-*-py3-none-any.whl)
+
+      - name: Invoke main program to export documentation
+        run: |
+          PREPPIPE_LANGUAGE=zh_cn PREPPIPE_TOOL=cmddocs python3 -m preppipe.pipeline_cmd --namespace=vn --markdown=docs/zh/script/cmddocs.md
+          PREPPIPE_LANGUAGE=zh_hk PREPPIPE_TOOL=cmddocs python3 -m preppipe.pipeline_cmd --namespace=vn --markdown=docs/zh-Hant/script/cmddocs.md
+          PREPPIPE_LANGUAGE=en    PREPPIPE_TOOL=cmddocs python3 -m preppipe.pipeline_cmd --namespace=vn --markdown=docs/en/script/cmddocs.md
 
       - name: Build site
         run: mkdocs build -f mkdocs.yml
