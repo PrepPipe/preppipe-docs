@@ -10,6 +10,7 @@ theme:
 
 
 markdown_extensions:
+  - attr_list:
   - admonition:
   - pymdownx.details:
   - pymdownx.superfences: # 添加 mermaid 支持，用来画图
@@ -28,6 +29,7 @@ plugins:
           site_name: 语涵编译器
           nav_translations:
             indexpage: 首页
+            quickstart: 快速上手样例
             intro: 简介
             frontend: 剧本格式（前端）
             frontendcmddocs: 命令列表（自动生成）
@@ -38,6 +40,7 @@ plugins:
           site_name: 語涵編譯器
           nav_translations:
             indexpage: 首頁
+            quickstart: 快速上手範例
             intro: 簡介
             frontend: 劇本格式（前端）
             frontendcmddocs: 命令列表（自動生成）
@@ -48,6 +51,7 @@ plugins:
           site_name: PrepPipe Compiler
           nav_translations:
             indexpage: Home
+            quickstart: Quickstart Examples
             intro: Introduction
             frontend: Script Format (Frontend)
             frontendcmddocs: Commands Listing (Auto-generated)
@@ -65,6 +69,8 @@ plugins:
 
 nav:
   - indexpage: 'index.md'
+  - quickstart:
+    - "quickstart/pipeline.md"
   - intro:
     - "intro/why_preppipe.md"
     - "intro/functionality.md"
