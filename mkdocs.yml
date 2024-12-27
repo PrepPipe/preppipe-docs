@@ -59,6 +59,9 @@ plugins:
             backend: Engine Support (Backend)
   - privacy
   - offline
+
+  # - mkdocs-pdf
+
   # git-revision-date-localized 需要 search 插件支持
   # 中文搜索目前效果不好，暂时禁用
   # - search
@@ -73,6 +76,7 @@ nav:
     - "quickstart/pipeline.md"
   - intro:
     - "intro/why_preppipe.md"
+    - "intro/usage.md"
     - "intro/functionality.md"
   - frontend:
     - "script/overview.md"
