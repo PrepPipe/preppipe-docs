@@ -1,0 +1,7 @@
+base_path: docs/
+base_path_ref: /
+common_export_path: generated/common/assetlistings
+language_specific_docs:
+  zh_cn: zh/generated/script/assets.md
+  zh_hk: zh-Hant/generated/script/assets.md
+  en: en/generated/script/assets.md

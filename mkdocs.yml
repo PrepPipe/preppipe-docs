@@ -18,6 +18,8 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
 
 plugins:
   - i18n:
@@ -33,6 +35,7 @@ plugins:
             intro: 简介
             frontend: 剧本格式（前端）
             frontendcmddocs: 命令列表（自动生成）
+            assetlistings: 内嵌素材列表（自动生成）
             middleend: 分析优化工具（中端）
             backend: 引擎支持（后端）
         - locale: zh-Hant
@@ -44,6 +47,7 @@ plugins:
             intro: 簡介
             frontend: 劇本格式（前端）
             frontendcmddocs: 命令列表（自動生成）
+            assetlistings: 內嵌素材列表（自動生成）
             middleend: 分析優化工具（中端）
             backend: 引擎支持（後端）
         - locale: en
@@ -55,16 +59,18 @@ plugins:
             intro: Introduction
             frontend: Script Format (Frontend)
             frontendcmddocs: Commands Listing (Auto-generated)
+            assetlistings: Embedded Assets Listing (Auto-generated)
             middleend: Analysis and Opt Tools (Middleend)
             backend: Engine Support (Backend)
   - privacy
   - offline
+  # 中文搜索目前效果不好，不过 ezlinks 插件需要该项
+  - search
+  - ezlinks
 
   # - mkdocs-pdf
 
-  # git-revision-date-localized 需要 search 插件支持
-  # 中文搜索目前效果不好，暂时禁用
-  # - search
+  # git-revision-date-localized 需要
   # 等这个插件支持 locale 字符串长于两个字母时再启用，现在 zh-Hant 会报错
   # - git-revision-date-localized:
   #    type: iso_date
@@ -81,6 +87,7 @@ nav:
   - frontend:
     - "script/overview.md"
     - frontendcmddocs: "script/cmddocs.md"
+    - assetlistings: "generated/script/assets.md"
   - middleend:
     - "middleend/overview.md"
     - "middleend/assetusage.md"

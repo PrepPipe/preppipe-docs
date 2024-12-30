@@ -1,3 +1,6 @@
 .cache
+.env
 generated
 config/generated
+docs/generated
+docs/**/generated
