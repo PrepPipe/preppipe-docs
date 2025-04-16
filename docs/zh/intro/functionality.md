@@ -20,7 +20,7 @@
 
 ### 新版 UI (开发中)
 
-图标和文件名：<img src="preppipe.ico" alt="初版UI的图标" width="64" height="64"/> preppipe.exe
+图标和文件名：<img src="preppipe.ico" alt="新版UI的图标" width="64" height="64"/> preppipe.exe
 
 目前仍在开发中的新 UI，也由 Python 编写。设计上支持以下功能和特性：
 

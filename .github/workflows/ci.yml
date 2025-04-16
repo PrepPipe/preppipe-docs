@@ -31,16 +31,19 @@ jobs:
         with:
           python-version: '>= 3.10'
 
-      - name: "Download main program"
+      - name: "Download generated files from the main repo"
         id: download_main
         uses: robinraju/release-downloader@v1
         with:
           repository: "PrepPipe/preppipe-python"
-          tag: "latest-main"
-          fileName: "preppipe-*-py3-none-any.whl"
+          tag: "latest-develop"
+          fileName: "preppipe-docs-overlay.7z"
           tarBall: false
           zipBall: false
           out-file-path: "."
+
+      - name: "Extract generated files"
+        run: 7z x preppipe-docs-overlay.7z -y
 
       - name: Install dependencies
         run: |
@@ -49,18 +52,6 @@ jobs:
           python3 -m pip install mkdocs-material
           python3 -m pip install mkdocs-static-i18n[material]
           python3 -m pip install mkdocs-ezlinks-plugin
-
-      - name: Install main program
-        run: |
-          python3 -m pip install $(ls preppipe-*-py3-none-any.whl)
-          python3 -m preppipe.assets.init_builtins
-
-      - name: Invoke main program to export documentation
-        run: |
-          PREPPIPE_LANGUAGE=zh_cn PREPPIPE_TOOL=cmddocs python3 -m preppipe.pipeline_cmd --namespace=vn --markdown=docs/zh/script/cmddocs.md
-          PREPPIPE_LANGUAGE=zh_hk PREPPIPE_TOOL=cmddocs python3 -m preppipe.pipeline_cmd --namespace=vn --markdown=docs/zh-Hant/script/cmddocs.md
-          PREPPIPE_LANGUAGE=en    PREPPIPE_TOOL=cmddocs python3 -m preppipe.pipeline_cmd --namespace=vn --markdown=docs/en/script/cmddocs.md
-          PREPPIPE_TOOL=assetmanager python3 -m preppipe.pipeline_cmd --export-docs scripts/assetlisting.yml
 
       - name: Build site
         run: mkdocs build -f mkdocs.yml
@@ -80,7 +71,7 @@ jobs:
             docs.zip
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './generated'
 
