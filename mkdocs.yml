@@ -64,8 +64,8 @@ plugins:
             backend: Engine Support (Backend)
   - privacy
   - offline
-  # 中文搜索目前效果不好，不过 ezlinks 插件需要该项
-  - search
+  - search:
+        separator: '[\s\u200b\-]'
   - ezlinks
 
   # - mkdocs-pdf
