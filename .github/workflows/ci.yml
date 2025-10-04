@@ -36,7 +36,7 @@ jobs:
         uses: robinraju/release-downloader@v1
         with:
           repository: "PrepPipe/preppipe-python"
-          tag: "latest-develop"
+          tag: "latest"
           fileName: "preppipe-docs-overlay.7z.*"
           tarBall: false
           zipBall: false
