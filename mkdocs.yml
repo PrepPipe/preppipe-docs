@@ -38,6 +38,7 @@ plugins:
             assetlistings: 内嵌素材列表（自动生成）
             middleend: 分析优化工具（中端）
             backend: 引擎支持（后端）
+            develop: 开发者文档
         - locale: zh-Hant
           name: 繁體中文
           site_name: 語涵編譯器
@@ -50,6 +51,7 @@ plugins:
             assetlistings: 內嵌素材列表（自動生成）
             middleend: 分析優化工具（中端）
             backend: 引擎支持（後端）
+            develop: 開發者文檔
         - locale: en
           name: English
           site_name: PrepPipe Compiler
@@ -62,6 +64,7 @@ plugins:
             assetlistings: Embedded Assets Listing (Auto-generated)
             middleend: Analysis and Opt Tools (Middleend)
             backend: Engine Support (Backend)
+            develop: Developer Document
   - privacy
   - offline
   - search:
@@ -94,4 +97,6 @@ nav:
   - backend:
     - "engine/renpy.md"
     - "engine/webgal.md"
+  - develop:
+    - "develop/assetconfig.md"
 
