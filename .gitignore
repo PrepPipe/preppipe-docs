@@ -1,5 +1,6 @@
 .cache
 .env
+.venv
 generated
 config/generated
 docs/generated
