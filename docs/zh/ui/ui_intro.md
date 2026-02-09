@@ -19,4 +19,4 @@ FairyGUI的运行库支持多种游戏引擎，但**不包括Ren'Py和WebGal**�
 
 FairyGUI发布的资源可以在Unity等游戏引擎上直接使用。如果用户想要在Ren'Py引擎上使用FairyGUI的资源，需要使用语涵编译器的“UI资源转换”功能，将其转为Ren'Py的界面语言(Screen Language)脚本，并发布到对应的Ren'Py项目目录中。
 
-由于Ren'Py的限制，游戏运行中的UI可能与FairyGUI设计的效果有细微差异。
+由于Ren'Py的限制，游戏运行中的UI可能与FairyGUI设计的效果有一些差异。
