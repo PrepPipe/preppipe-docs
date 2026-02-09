@@ -1,0 +1,143 @@
+# UI资源转换概述
+
+FairyGUI中的基本单元是组件(component)，类似于RenPy中的界面(screen)，但并不完全等价。具体转换逻辑如下：
+
+- FairyGUI中不带任何扩展类型(extention)的组件会转换为一个对应的RenPy界面(screen)。
+- FairyGUI中的按钮(button)会转换为一个对应的RenPy界面(screen)。
+- FairyGUI中的标签(label)暂不转换。
+- FairyGUI中的下拉框(combbox)暂不转换。
+- FairyGUI中的进度条(progressbar)暂不转换。
+- FairyGUI中的滑动条(slider)会转换为RenPy中一个bar的样式(style)。
+- FairyGUI中的滚动条(slider)会转换为RenPy中一个bar的样式(style)。
+- FairyGUI中的弹出菜单(popupmenu)暂不转换。
+- FairyGUI中的动画(movieclip)暂不转换。
+- FairyGUI中的位图字体(font)暂不转换。
+- FairyGUI中的窗口框架(windowframe)暂不转换。
+
+我们建议，目前只使用最基本的组件和按钮进行UI设计。后续将逐步添加更多FairyGUI组件的转换支持。
+
+# 组件转换逻辑
+
+## FairyGUI组件 -> RenPy界面
+
+RenPy中有一些界面名称是特殊的。使用这些特殊界面名作为FairyGUI中的组件名称时，语涵编译器进行UI资源转换时将特殊处理，添加额外代码和逻辑。详见 >特殊组件界面设计说明。
+除了RenPy内置特殊界面名称，语涵编译器还添加了几项，使转换后的界面包含一些处理逻辑，而不需要用户再添加代码。
+目前所有特殊界面名称如下：
+
+1. 菜单类界面名称，会添加 tag menu。
+main_menu, game_menu, save, load, preferences, history, help, about
+
+2. 模态类界面名称，会添加 Modal True。
+confirm
+
+3. 选项分支界面。
+choice
+
+4. 对话界面
+say
+
+5. 存档相关界面
+save, load
+
+6. 对话历史界面
+history, history_item
+
+7. 图鉴类界面
+gallery, music_room
+
+不使用特殊界面名称创建的FairyGUI组件将按照下列步骤转换为RenPy的界面：
+
+1. 根据组件中的“控制器“，生成界面控制变量和辅助函数。
+2. 根据组件的“溢出处理”类型，决定是否需要一层viewport来限制显示范围。
+3. 根据组件的显示列表(displayList)属性，依次添加界面内元素。
+
+## FairyGUI按钮 -> RenPy界面
+
+FairyGUI中扩展类型为“Button”的组件是按钮。
+在FairyGUI编辑器中建立的按钮默认会带一个名为“button”的控制器，且默认有4个页面，分别是up、down、over和selectedover。(暂时只支持4页面控制器按钮)
+分别表示按钮的弹起、按下、鼠标指针悬浮在按钮上、按钮选中状态且鼠标指针悬浮在按钮上。
+其中down状态同时用于普通按钮被鼠标按下和单选按钮、复选按钮的选中状态。
+
+RenPy的原生按钮并不支持按钮的“按下”状态，转换后按钮的4种状态分别对应Renpy中的idle、selected、hover和selected_hover。
+转换时会根据按钮内元素合成为4个不同状态的image对象。目前支持合成的按钮元素类型仅限文本、图形和图片，不支持按钮内引用其他组件。
+转换后的按钮是一个包含button组件的界面，入参包含title、icon和actions。
+title和icon分别对应FairyGUI按钮中的文本标题和图形标题。actions表示按钮行为，非特殊界面中一般是NullAction()。
+例如，FairyGUI中一个名为“save_slot_button”的按钮，转换后的界面代码为：
+```
+# 按钮screen定义
+# 从FairyGUI按钮组件save_slot_button转换而来
+screen save_slot_button(title='', actions=NullAction(), icon=Null()):
+    button:
+        padding (0, 0, 0, 0)
+        style_prefix 'save_slot_button'
+        xysize (1206, 192)
+        background 'save_slot_button_[prefix_]background'
+        text title:
+            pos (335, 61)
+            anchor (0.0, 0.0)
+        action actions
+        add icon:
+            pos (66, 30)
+            size (228, 123)
+```
+引用该按钮的其他组件转换后的界面中则使用 *use* 语句，比如：
+```
+use save_slot_button(title=FileTime(1, format=_("{#file_time}%Y-%m-%d %H:%M"), empty=_('')), actions=FileAction(1), icon=FileScreenshot(1))
+```
+## FairyGUI滑动条 -> RenPy样式
+
+FairyGUI中扩展类型为“Slider”的组件是滑动条。
+在FairyGUI编辑器中建立的滑动条默认至少包含3个元素，名称分别为n0、bar或bar_v、grip。
+转换为RenPy代码时，n0会用作滑动条样式的right_bar或bottom_bar特性，bar会用作滑动条样式的left_bar或top_bar特性，grip按钮中的显示内容会用作滑动条样式的thumb。
+例如，FairyGUI中一个名为“honrizontal_slider”的滑动条，转换后的样式和相关代码为：
+```
+image horizontal_slider_base_bar_image:
+    'horizontal_bar_base'
+image horizontal_slider_active_bar_image:
+    'horizontal_bar_active'
+image horizontal_slider_idle_thumb_image:
+    'horizontal_slider_grip_idle_background'
+image horizontal_slider_hover_thumb_image:
+    'horizontal_slider_grip_hover_background'
+
+# 滑动条样式定义
+style horizontal_slider:
+    bar_vertical False
+    xysize (540, 3)
+    thumb_offset 24
+    left_bar 'horizontal_bar_active'
+    right_bar 'horizontal_bar_base'
+    thumb Fixed(Frame('horizontal_slider_[prefix_]thumb_image',xysize=(48, 54),pos=(0,-22)))
+```
+引用该滑动条的其他组件转换后的界面中则使用 *bar* 组件加 style 的形式，比如：
+```
+bar value Preference('main volume') style 'horizontal_slider'
+```
+
+??? note "最终效果的一点区别"
+
+FairyGUI中的滑动条active部分的尺寸变化使用缩放，RenPy中则是裁剪。
+
+## FairyGUI滚动条 -> RenPy样式
+
+FairyGUI中扩展类型为“ScrollBar”的组件是滚动条。
+在FairyGUI编辑器中建立的滑动条默认至少包含3个元素，名称分别为n0、bar、grip。
+转换为RenPy代码时，n0会用作滚动条样式的base特性，bar是个空图形不处理，grip按钮中的显示内容会用作滚动条样式的thumb。
+例如，FairyGUI中一个名为“vertical_slider”的滑动条，转换后的样式和相关代码为：
+```
+# 滚动条样式定义
+style vertical_scrollbar:
+    bar_vertical True
+    bar_invert True
+    xysize (12, 200)
+    base_bar Frame('vertical_scrollbar_[prefix_]bar')
+    thumb Frame('vertical_scrollbar_grip_[prefix_]background')
+```
+引用该滚动条的其他组件(一般是列表)转换后的界面中使用 *vbar* 组件加 style 的形式，比如：
+```
+vbar:
+    value YScrollValue('load_save_slot_list_vp')
+    style 'vertical_scrollbar'
+```
+
+
