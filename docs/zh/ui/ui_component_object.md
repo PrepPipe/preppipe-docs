@@ -18,15 +18,60 @@ FairyGUI组件内的元素称作元件。
 可以添加的控件类型，从上往下依次为：文本、富文本、输入文本、图形、列表、装载器和3D装载器。
 目前语涵编译器的“UI资源转换”功能只处理文本、输入文本、图形和列表，其他类型的控件不会出现在转换后的Ren'Py界面代码中。
 
-### FairyGUI元件的基本属性
+图片可以从FairyGUI编辑器的**资源库**窗口拖入编辑区域添加到舞台。
+组件、标签、按钮、下拉框、滑动条、进度条需要新建对应资源，之后可以从FairyGUI编辑器的**资源库**窗口拖入编辑区域添加到舞台。
+![模板工程中的资源库](screenshots\fguieditor\assets_lib.png)
 
+## FairyGUI元件的基本属性
+
+选中舞台中的元素后，FairyGUI编辑器中的**检查器**窗口中可以查看对应元件的各种属性。
 FairyGUI元件具有以下基本属性：id、名称、引用源、位置、尺寸、缩放、倾斜、轴心、锚点、不透明度、旋转、是否可见、是否变灰、是否可触摸。
 ![基本属性](screenshots\fguieditor\basic_attributes.png)
 
 基本属性是任意元件都拥有的属性。但在转换为Ren'Py脚本语言时不一定都生效。
 目前，倾斜、是否变灰、是否可触摸，这三项的设置不会对最终结果有影响。
 
-### FairyGUI元件的属性控制
+### id
+
+源id，FairyGUI内部属性，用于各种引用关系。在FairyGUI编辑器中无法自由修改。UI资源转换器不处理该属性。
+
+### 名称
+
+元件名，FairyGUI编辑器仅要求同一舞台内不可出现重名元件。UI资源转换器不处理该属性。
+
+### 位置
+
+元件坐标。对应Ren'Py位置样式特性*pos*。
+FairyGUI与Ren'Py相同，使用屏幕左上角作为坐标系原点。(Unity使用屏幕左下角作为坐标系原点)
+
+### 尺寸
+
+对应Ren'Py位置样式特性*xysize*。
+
+### 缩放
+
+分别对应Ren'Py变换特性*xzoom*和*yzoom*。Ren'Py中的*zoom*是个浮点型变量而不是元组。
+
+### 倾斜
+
+转换器暂时忽略此属性，不生成对应Ren'Py代码。
+
+### 轴心和锚点
+
+FairyGUI中所有元件的默认锚点和轴心都是(0,0)。可以单独设置轴心，但无法单独设置锚点，只能修改轴心位置后勾选**同时作为锚点**实现锚点的修改。注意，修改锚点后，整个元件的*位置*也会发生改变。
+在使用**倾斜**和**旋转**时会用到轴心，此时勾选“同时作为锚点”，便于根据旋转中心设置元件的位置。
+
+Ren'Py中的可视组件的默认锚点不固定，而且会受到*show*和*add*语句影响。与FairyGUI相反，Ren'Py可以单独设置锚点，但无法单独设置旋转轴心，只能通过*transform_anchor*设置为True将轴心与锚点改为同一个值。
+
+### 不透明度
+
+对应Ren'Py变换特性alpha。
+
+### 旋转
+
+对应Ren'Py变换特性rotate。
+
+## FairyGUI元件的属性控制
 
 FairyGUI元件具有属性控制，可以通过控制器改变整个组件的显示效果。
 ![属性控制](screenshots\fguieditor\attribute_control.png)
@@ -36,25 +81,25 @@ FairyGUI元件具有属性控制，可以通过控制器改变整个组件的显
 
 若有需要，可以考虑使用“控制器+显示控制+多个类似组件”的方式实现其他几种属性控制的效果。
 例如，某个名为`component_a`的组件中包含名为`controller_a`的控制器和名为`str_a`的文本控件，需要通过控制器索引修改`str_a`显示的文本内容。
-可以复制`str_a`重命名为`str_b`，并使用显示控制将各控制器索引与两个文本控件分别关联。控制器索引号为0时只显示`str_a`，控制器索引号为1时只显示`str_b`。
+可以复制`str_a`并重命名为`str_b`，并使用显示控制将各控制器索引与两个文本控件分别关联。控制器索引号为0时只显示`str_a`，控制器索引号为1时只显示`str_b`。
 
-### FairyGUI元件的关联系统
+## FairyGUI元件的关联系统
 
 FairyGUI元件具有关联设置。
 ![关联设置](screenshots\fguieditor\relations.png)
 
 关联系统是FairyGUI实现自动布局的核心技术。但是，目前转换器还无法处理FariyGUI元件之间的关联关系。
 
-建议使用FairyGUI编辑器时只设计固定布局。
+建议使用FairyGUI编辑器时只设计**固定布局**。
 
-### 效果属性
+## 效果属性
 
 FairyGUI元件可以设置显示效果。
 ![效果设置](screenshots\fguieditor\effects_attributes.png)
 
 FairyGUI的Blend效果属性可以修改元件的渲染混合方式，滤镜效果属性可以修改元件的亮度、对比度、饱和度和色相。目前转换器还无法处理FariyGUI元件的效果属性。
 
-### 其他属性
+## 其他属性
 
 FairyGUI元件其他设置项包括tooltips和自定义数据。
 ![其他设置](screenshots\fguieditor\other_attributes.png)
@@ -78,7 +123,7 @@ bar value Preference('main volume') style 'horizontal_slider'
 具体的action或barvalue功能请查看Ren'Py文档：
 [界面行为、值和函数](https://doc.renpy.cn/zh-CN/screen_actions.html)
 
-### 不同元件的独有属性
+## 不同元件的独有属性
 
 有些元件具有自己的独有属性，后续篇幅将根据元件类型展开。
 
@@ -107,7 +152,9 @@ bar value Preference('main volume') style 'horizontal_slider'
 
 ### 单行文本
 
-<u>A</u>_ 按钮决定文本是否单行。转换器暂不处理该项，启用后也无效果。
+<u>A</u>_ 按钮决定文本是否单行。
+
+启用后，转换器会将文本内容中的换行删除，生成Ren'Py文本组件的样式特性*layout*设置为**nobreak**。
 
 ### 粗体、斜体、下划线、删除线
 
@@ -122,7 +169,7 @@ bar value Preference('main volume') style 'horizontal_slider'
 
 ### 字体
 
-对应Ren'Py*文本样式特性*中的font。
+对应Ren'Py文本样式特性中的*font*。
 
 不修改任何设置的情况下，FairyGUI编辑器中使用操作系统默认字体作为文本预览字体，如Windows为*微软雅黑*。
 Ren'Py默认字体为*SourceHanSansLite*。因此在不指定字体的情况下，FairyGUI编辑器预览与Ren'Py实际运行结果有明显差别。
@@ -135,13 +182,13 @@ Ren'Py支持otf、ttf和ttc字体文件，最近还新增了woff和woff2字体�
 
 ### 字体大小
 
-对应Ren'Py*文本样式特性*中的color。
+对应Ren'Py文本样式特性中的*size*。
 
 FairyGUI编辑器中字体大小限制为1到200。若需要用到更大的字号，需要通过添加转换器参数或修改生成的Ren'Py代码。
 
 ### 颜色、行距、字距
 
-分别对应Ren'Py*文本样式特性*中的*color*、*line_spacing*、*kerning*。
+分别对应Ren'Py文本样式特性中的*color*、*line_spacing*、*kerning*。
 
 ### 自动大小
 
@@ -156,7 +203,7 @@ Ren'Py中永远会将整段文本完整渲染，除非单行过长或行数过�
 ### 对齐
 
 FairyGUI编辑器中的对齐有两项：水平对齐和垂直对齐。
-水平对齐对应Ren'Py的textalign。
+水平对齐对应Ren'Py的*textalign*。
 垂直对齐在Ren'Py中没有对应的文本样式特性。FairyGUI编辑器预览与转换后的Ren'Py显示效果会有差异。
 
 ### 描边和投影
@@ -169,7 +216,7 @@ FairyGUI编辑器中的对齐有两项：水平对齐和垂直对齐。
 例如，FairyGUI中某个文本描边粗细为1，颜色为纯黑色(#FFFFFF)，投影偏移为(3,3)，颜色为紫色(#9933CC)。转换后的Ren'Py文本outlines可能是：
 > outlines [(absolute(0), "#9933cc", absolute(3), absolute(3)), (absolute(1), "#9933cc", absolute(3), absolute(3)), (absolute(1), "#000000", absolute(0), absolute(0))]
 
-# 生成Ren'Py文本样式
+### 生成Ren'Py文本样式
 
 转换器对不同类型组件中的文本控件使用不同的处理方式。
 
@@ -185,4 +232,56 @@ FairyGUI编辑器中的对齐有两项：水平对齐和垂直对齐。
 
 其他组件中添加的文本控件不会生成文本样式，而是直接在界面定义代码中使用样式特性(style property)赋值。
 
+## 图片
 
+*图片*是FairyGUI中直接引用图片文件资源的组件。在发布的资源描述文件中有三块内容用于存储图片信息。
+
+1. 资源描述文件 “项目名称.bytes” 中的*package.xml*，包含图片id、图片文件名、路径和尺寸等信息。
+> <image id="uluf1" name="universal_background" path="/Images/background/" size="1920,1080"/>
+2. 资源描述文件 “项目名称.bytes” 中的某个组件的displayList中。引用时使用图片id，即src属性。此处的图片才会有位置属性。
+> <image id="n0_uluf" name="bg" src="uluf1" xy="0,0"/>
+3. 资源描述文件 “项目名称@sprites.bytes” 中包含图片id与发布图集的对应关系。每个图片拥有7或11个字段，分别为：image id、图集编号、x、y、width、height、rotate，可能加上offset_x、offset_y、source_width、source_height。
+> uluf1 101 0 74 1920 1080 0 0 0 1920 1080
+
+除了基本属性，图片具有图片属性和实例属性。
+
+图片属性用于图片文件的信息和可设置项，包括图像大小、数据大小、缩放模式、是否平滑、发布时纹理集选择等。
+双击资源库或舞台上的图片，可以查看图片的图片属性。
+
+实例属性用于图片在舞台(组件)的显示效果，包括：颜色、亮度、翻转和填充。
+在舞台上选中一个图，可以在检查器窗口查看图片的实例属性。
+
+### 图像大小
+
+仅限SVG文件可以修改。此处修改后，转换后的Ren'Py代码未定义。
+
+### 数据大小
+
+参考信息。
+
+### 缩放模式
+
+缩放模式属性存储在资源描述文件 “项目名称.bytes” 中的*package.xml*里。
+
+*九宫格*对应Ren'Py中的Frame类，*平铺*对应Ren'Py中的Tile类。
+
+### 平滑、质量、纹理集
+
+这3项影响发布后的图集文件。
+
+### 禁止裁剪边缘空白
+
+建议在发布设置的全局设置中就取消“裁剪图片边缘空白”。
+如果发现转换后Ren'Py内部分图片显示有误，可以尝试将有问题的图片勾选上该项并重新发布和转换。
+
+### 颜色
+
+图片变色，将图片颜色乘上一个指定颜色。指定颜色会将RGB3个通道的值分别归一化后再进行变色，对应Ren'Py中的TintMatrix类。
+
+### 亮度
+
+FairyGUI中图片的亮度完全等效于把颜色属性改为黑白灰。转换器不处理此亮度。
+
+### 翻转、填充
+
+转换器暂不处理这两项，也不会生成对应的Ren'Py代码。
