@@ -13,20 +13,20 @@ FairyGUI组件内的元素称作元件。
 元件类型有很多，包括图片、图形、动画、装载器、文本、富文本、组、组件、标签、按钮、下拉框、滚动条、滑动条、进度条、列表。
 
 其中一些只能通过舞台左侧的工具栏向组件内添加，称为**控件**。
-![侧工具栏里的控件](screenshots\fguieditor\component_tool_menu.png)
+![侧工具栏里的控件](screenshots/fguieditor/component_tool_menu.png)
 
 可以添加的控件类型，从上往下依次为：文本、富文本、输入文本、图形、列表、装载器和3D装载器。
 目前语涵编译器的“UI资源转换”功能只处理文本、输入文本、图形和列表，其他类型的控件不会出现在转换后的Ren'Py界面代码中。
 
 图片可以从FairyGUI编辑器的**资源库**窗口拖入编辑区域添加到舞台。
 组件、标签、按钮、下拉框、滑动条、进度条需要新建对应资源，之后可以从FairyGUI编辑器的**资源库**窗口拖入编辑区域添加到舞台。
-![模板工程中的资源库](screenshots\fguieditor\assets_lib.png)
+![模板工程中的资源库](screenshots/fguieditor/assets_lib.png)
 
 ## FairyGUI元件的基本属性
 
 选中舞台中的元素后，FairyGUI编辑器中的**检查器**窗口中可以查看对应元件的各种属性。
 FairyGUI元件具有以下基本属性：id、名称、引用源、位置、尺寸、缩放、倾斜、轴心、锚点、不透明度、旋转、是否可见、是否变灰、是否可触摸。
-![基本属性](screenshots\fguieditor\basic_attributes.png)
+![基本属性](screenshots/fguieditor/basic_attributes.png)
 
 基本属性是任意元件都拥有的属性。但在转换为Ren'Py脚本语言时不一定都生效。
 目前，倾斜、是否变灰、是否可触摸，这三项的设置不会对最终结果有影响。
@@ -74,7 +74,7 @@ Ren'Py中的可视组件的默认锚点不固定，而且会受到*show*和*add*
 ## FairyGUI元件的属性控制
 
 FairyGUI元件具有属性控制，可以通过控制器改变整个组件的显示效果。
-![属性控制](screenshots\fguieditor\attribute_control.png)
+![属性控制](screenshots/fguieditor/attribute_control.png)
 
 属性控制总共有9类，分别为：显示控制、位置控制、大小控制、颜色控制、外观控制、文本控制、图标控制、动画控制、字体大小控制。
 当前版本的转换器只支持**显示控制**，即通过控制器切换元件是否显示。
@@ -86,7 +86,7 @@ FairyGUI元件具有属性控制，可以通过控制器改变整个组件的显
 ## FairyGUI元件的关联系统
 
 FairyGUI元件具有关联设置。
-![关联设置](screenshots\fguieditor\relations.png)
+![关联设置](screenshots/fguieditor/relations.png)
 
 关联系统是FairyGUI实现自动布局的核心技术。但是，目前转换器还无法处理FariyGUI元件之间的关联关系。
 
@@ -95,28 +95,24 @@ FairyGUI元件具有关联设置。
 ## 效果属性
 
 FairyGUI元件可以设置显示效果。
-![效果设置](screenshots\fguieditor\effects_attributes.png)
+![效果设置](screenshots/fguieditor/effects_attributes.png)
 
 FairyGUI的Blend效果属性可以修改元件的渲染混合方式，滤镜效果属性可以修改元件的亮度、对比度、饱和度和色相。目前转换器还无法处理FariyGUI元件的效果属性。
 
 ## 其他属性
 
 FairyGUI元件其他设置项包括tooltips和自定义数据。
-![其他设置](screenshots\fguieditor\other_attributes.png)
+![其他设置](screenshots/fguieditor/other_attributes.png)
 
 转换器暂不处理tooltips。(后续会支持)
 
 按钮和滑动条的自定义数据会被转换器处理。
 
 按钮的自定义数据将用作按钮的行为(action)。例如，某按钮的自定义数据设置为 *Start()* ，转换后引用该按钮时会将该值作为actions参数的值传入按钮界面:
-"""
-use main_menu_button_new(title='', actions=Start(), icon=Null())
-"""
+>use main_menu_button_new(title='', actions=Start(), icon=Null())
 
 滑动条的自定义数据将用作滑动条的条值(barvalue)。例如，某滑动条的自定义数据设置为 *Preference('main volume')* ，转换后引用该滑动块的界面会设置为：
-"""
-bar value Preference('main volume') style 'horizontal_slider'
-"""
+>bar value Preference('main volume') style 'horizontal_slider'
 
 此设计可以在UI设计层面就指定常用组件的实际功能，用户不需要转换为界面语言代码后再查找对应的按钮或滑动条并修改具体功能，也避免了修改UI重新发布和转换后覆盖actions或barvalue的问题。
 
@@ -131,10 +127,12 @@ bar value Preference('main volume') style 'horizontal_slider'
 
 *文本控件*是FairyGUI组件内用于渲染文本的控件。在发布的资源描述文件中是displayList中的text标签，例如：
 
-> <text id="n6_uluf" name="n6" xy="123,1" size="727,179" font="SourceHanSansLite" fontSize="140" color="#ffffff" vAlign="middle" leading="0" autoSize="none" italic="true" shadowColor="#9933cc" shadowOffset="3,3" text="Game Title"/>
+```xml
+<text id="n6_uluf" name="n6" xy="123,1" size="727,179" font="SourceHanSansLite" fontSize="140" color="#ffffff" vAlign="middle" leading="0" autoSize="none" italic="true" shadowColor="#9933cc" shadowOffset="3,3" text="Game Title"/>
+```
 
 除了基本属性，文本控件具有文本属性，包括：字体名、字号、字体颜色、水平对齐方式、垂直对齐方式、字间距、行间距、自动大小类型、是否UBB语法、是否启用模板、是否单行、是否粗体、是否斜体、是否下划线、是否删除线、描边粗细、描边颜色、投影偏移、投影颜色。
-![文本属性](screenshots\fguieditor\text_attributes.png)
+![文本属性](screenshots/fguieditor/text_attributes.png)
 
 ### UBB语法
 
@@ -243,7 +241,7 @@ Ren'Py中类似功能的实现通过文本标签系统，语法、效果等与Fa
 
 输入文本比文本多几个属性，分别为：提示文字、最大长度、是否密码、输入限制、键盘类型。
 在FairyGUI编辑器输入文本的实例属性中，有一个齿轮图标的按钮，点击后可以看到输入文本控件的特殊属性。
-![输入文本属性](screenshots\fguieditor\input_text_attributes.png)
+![输入文本属性](screenshots/fguieditor/input_text_attributes.png)
 
 ### 输入变量
 
@@ -337,6 +335,41 @@ FairyGUI中图片的亮度完全等效于把*颜色*属性改为黑白灰。亮�
 
 ## 图形
 
+图形仅使用一些参数描述，不会以图片形式发布在纹理集中。
+FairyGUI支持的图形包括：空白(无)、矩形、圆形、正多边形、多边形。
+
+除了基本属性，图形可以还有图形属性，包括图形类别、线条粗细、线条颜色与填充颜色。
+
+### 空白(无)
+
+FairyGUI编辑器版本不同，空白图形的名称略有不同。6.1.4版本的编辑器中此类图形名为“空白”，更早版本和官方在线文档为“无”。
+
+空白图形通常仅用于布局。转换器会将空白图形生成为Ren'Py中的*Null()*对象，保留尺寸信息。
+
+### 矩形
+
+FairyGUI中的矩形是圆角矩形，可以指定4个角的圆角半径。若在*圆角*一栏为单个整数，表示4个角使用相同的圆角半径。若*圆角*一栏为使用英文逗号分隔的多个整数，则依次用于左上角、右上角、左下角、右下角的圆角半径。省略不写的数值默认为0，多于4项的数值会被忽略。例如，一个矩形的左上角、右上角、左下角、右下角的圆角半径分别为0、15、25、0，此项可以写作：
+> ,15,25,
+
+转换器使用自定义着色器实现矩形的渲染。着色器定义在 *02_renpy_shader.rpy* 文件中。图形对应的image对象定义在 *preppipe_image_definition.rpy* 文件中。
+
+### 圆形
+
+FairyGUI中的圆形会跟随整个元件发生形变。当元件尺寸的宽与高不一样时，图形会看起来像个椭圆，但并不是符合数学层面定义的椭圆。
+
+转换器使用自定义着色器实现矩形的渲染。着色器定义在 *02_renpy_shader.rpy* 文件中。图形对应的image对象定义在 *preppipe_image_definition.rpy* 文件中。
+
+### 正多边形
+
+FairyGUI中的正多边形不会跟随整个元件发生形变，编辑器内预览结果等效于元件左上角为锚点的内接最大正方形区域内绘制正多边形。
+
+转换器暂不处理正多边形，生成的Ren'Py脚本中不包含对应图形。
+
+### 多边形
+
+FairyGUI中的多边形不会跟随整个元件发生形变，编辑器内预览结果等效于元件左上角为锚点的内接最大正方形区域内绘制多边形。
+
+转换器暂不处理多边形，生成的Ren'Py脚本中不包含对应图形。
 
 
 
