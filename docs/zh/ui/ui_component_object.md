@@ -286,11 +286,22 @@ Ren'Py中类似功能的实现通过文本标签系统，语法、效果等与Fa
 *图片*是FairyGUI中直接引用图片文件资源的组件。在发布的资源描述文件中有三块内容用于存储图片信息。
 
 1. 资源描述文件 “项目名称.bytes” 中的*package.xml*，包含图片id、图片文件名、路径和尺寸等信息。
-> <image id="uluf1" name="universal_background" path="/Images/background/" size="1920,1080"/>
+
+    ```xml
+    <image id="uluf1" name="universal_background" path="/Images/background/" size="1920,1080"/>
+    ```
+
 2. 资源描述文件 “项目名称.bytes” 中的某个组件的displayList中。引用时使用图片id，即src属性。此处的图片才会有位置属性。
-> <image id="n0_uluf" name="bg" src="uluf1" xy="0,0"/>
+
+    ```xml
+    <image id="n0_uluf" name="bg" src="uluf1" xy="0,0"/>
+    ```
+
 3. 资源描述文件 “项目名称@sprites.bytes” 中包含图片id与发布图集的对应关系。每个图片拥有7或11个字段，分别为：image id、图集编号、x、y、width、height、rotate，可能加上offset_x、offset_y、source_width、source_height。
-> uluf1 101 0 74 1920 1080 0 0 0 1920 1080
+
+    ```text
+    uluf1 101 0 74 1920 1080 0 0 0 1920 1080
+    ```
 
 除了基本属性，图片具有图片属性和实例属性。
 

@@ -7,13 +7,13 @@ FairyGUI中的控制器是组件状态机的一种实现。可以通过切换状
 ## 控制器面板
 
 组件编辑模式下的，左上角可以看到控制器面板，包括已有控制器和“增加控制器”按钮。
-[控制器面板](screenshots\fguieditor\component_controller_panel.png)
+![控制器面板](screenshots\fguieditor\component_controller_panel.png)
 
 点击“增加控制器”按钮，会弹出如下窗口，可创建新的控制器：
-[增加控制器](screenshots\fguieditor\component_add_controller_window.png)
+![增加控制器](screenshots\fguieditor\component_add_controller_window.png)
 
 点击某个控制器名称，会弹出如下窗口，可修改现有控制器：
-[修改控制器](screenshots\fguieditor\component_modify_controller_window.png)
+![修改控制器](screenshots\fguieditor\component_modify_controller_window.png)
 
 点击某个控制器名称后面的序列号按钮，可以切换控制器当前状态。如果界面内的元件设置了“属性控制”，也会切换到对应索引号的状态。
 
@@ -36,7 +36,7 @@ screen preferences():
 ## 按钮的控制器模板
 
 FairyGUI的控制器设置窗口有一个按钮控制器模板按钮：
-[按钮控制器模板](screenshots\fguieditor\button_controller_template.png)
+![按钮控制器模板](screenshots\fguieditor\button_controller_template.png)
 
 点击后可以从4种按钮控制器模板中选择，将当前控制器改名为button并设置对应的索引。
 

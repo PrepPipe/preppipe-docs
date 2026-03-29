@@ -7,8 +7,8 @@ UI资源转换器目前只处理简单按钮，即图片和文字为主要元素
 
 ## 创建按钮
 
-在FairyGUI编辑器中通过功能菜单或快捷按钮可以创建按钮，弹出“创建按钮”提示窗口：
-[创建按钮](screenshots\fguieditor\create_button.png)
+在FairyGUI编辑器中通过功能菜单“资源->新建按钮”或快捷按钮可以创建按钮，弹出“创建按钮”提示窗口：
+![创建按钮](screenshots\fguieditor\create_button.png)
 
 ### 按钮尺寸
 
@@ -47,7 +47,7 @@ UI资源转换器目前只能处理icon装载器中的图片。如果icon装载�
 
 在创建按钮阶段，设置完按钮不同状态下显示的图片，就已完成按钮的大部分设计工作。还有少量可选的设计工作在FairyGUI编辑器中完成。
 
-[按钮属性](screenshots\fguieditor\button_attributes.png)
+![按钮属性](screenshots\fguieditor\button_attributes.png)
 
 ### 按钮属性-点击音效
 
@@ -80,7 +80,7 @@ FairyGUI中的按钮按下效果与按下状态显示的图片是两个独立的
 ## FairyGUI编辑器舞台的按钮属性
 
 在其他普通组件的编辑舞台中，可以直接拖入设计完成的按钮组件，生成一个按钮实例。FairyGUI的按钮实例具有按钮实例属性。
-[按钮实例属性](screenshots\fguieditor\button_instance_attributes.png)
+![按钮实例属性](screenshots\fguieditor\button_instance_attributes.png)
 
 按钮实例属性的标签与设计按钮时设置的*模式*有关。如果按钮模式是“普通按钮”，实例属性的标签就是“普通按钮”。上图的按钮，模式是“单选按钮”，所以标签也是“单选按钮”。
 
