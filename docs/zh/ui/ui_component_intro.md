@@ -76,6 +76,7 @@ FairyGUI中的遮罩(和挖洞)使用模板测试(Stencil Op)技术，Ren'Py并�
 其他扩展类型的组件，详见下列：
 
 [按钮](./ui_component_button.md)
+[进度条](./ui_component_progressbar.md)
 [滚动条](./ui_component_scrollbar.md)
 [滑动条](./ui_component_slider.md)
 [下拉框](./ui_component_combobox.md)
