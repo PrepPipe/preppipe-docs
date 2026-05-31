@@ -55,7 +55,7 @@ screen main_menu():
 
 目前UI资源转换器只处理按钮的*边缘留空*属性，转换后的Ren'Py代码中，button可视组件的padding特性对应FairyGUI中的*边缘留空*属性。
 
-FairyGUI中的*边缘虚化*效果无法在Ren'Py中实现。
+FairyGUI中的*边缘虚化*效果,在Ren'Py中使用着色器实现。效果与FairyGUI编辑器的预览效果略有差异，虚化效果更明显，建议将该设置设置的略微小一些，比如50。
 
 ### 自定义遮罩
 

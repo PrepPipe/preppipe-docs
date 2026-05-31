@@ -21,12 +21,15 @@
     若发布的资源直接用于Unity引擎，则根据自身需要进行发布设置。无须进行本步骤的设置。
 
 新建或打开已存在的项目后，点击菜单栏“文件->发布设置”：
+
 ![发布设置菜单](screenshots/fguieditor/menu_publish_setting.png)
 
 或点击快捷菜单的“发布设置”按钮：
+
 ![发布设置按钮](screenshots/fguieditor/quickmenu_publish_setting.png)
 
 在弹出的“发布设置”弹窗中，“全局设置->包格式”栏，务必**取消勾选**“使用二进制格式”和“剪裁图片边缘空白”。
+
 ![发布格式设置](screenshots/fguieditor/publish_setting_base.png)
 
 “二进制格式”发布的资源包在搭配对应引擎的FairyGUI运行库时可以有很高的效率，但由于不存在Ren'Py的运行库，所以目前无效。语涵编译器的“UI资源转换功能”只识别文本格式的bytes文件。

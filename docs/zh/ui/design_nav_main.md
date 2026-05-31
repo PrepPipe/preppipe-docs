@@ -116,7 +116,7 @@ bar value Preference('main volume') style 'horizontal_slider'
 
 ??? note "最终效果的一点区别"
 
-FairyGUI中的滑动条active部分的尺寸变化使用缩放，Ren'Py中则是裁剪。
+   FairyGUI中的滑动条active部分的尺寸变化使用缩放，Ren'Py中则是裁剪。
 
 ## FairyGUI滚动条 -> Ren'Py样式
 
