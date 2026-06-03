@@ -1,12 +1,12 @@
 # UI资源转换概述
 
-FairyGUI中的基本单元是组件(component)，类似于Ren'Py中的界面(screen)，但并不完全等价。具体转换逻辑如下：
+FairyGUI中的基本单元是组件(component)，类似于Ren'Py中的界面(screen)，但并不完全等价。具体转换结果如下：
 
 - FairyGUI中不带任何扩展类型(extention)的组件会转换为一个对应的Ren'Py界面(screen)。
 - FairyGUI中的按钮(button)会转换为一个对应的Ren'Py界面(screen)。
-- FairyGUI中的标签(label)暂不转换。
-- FairyGUI中的下拉框(combbox)暂不转换。
-- FairyGUI中的进度条(progressbar)暂不转换。
+- FairyGUI中的标签(label)会转换为一个对应的Ren'Py界面(screen)。
+- FairyGUI中的下拉框(combbox)会转换为一个对应的Ren'Py界面(screen)。
+- FairyGUI中的进度条(progressbar)会转换为一个对应的Ren'Py界面(screen)。
 - FairyGUI中的滑动条(slider)会转换为Ren'Py中一个bar的样式(style)。
 - FairyGUI中的滚动条(slider)会转换为Ren'Py中一个bar的样式(style)。
 - FairyGUI中的弹出菜单(popupmenu)暂不转换。
@@ -20,14 +20,14 @@ FairyGUI中的基本单元是组件(component)，类似于Ren'Py中的界面(scr
 
 ## FairyGUI组件 -> Ren'Py界面
 
-Ren'Py中有一些界面名称是特殊的。使用这些特殊界面名作为FairyGUI中的组件名称时，语涵编译器进行UI资源转换时将特殊处理，添加额外代码和逻辑。详见 >特殊组件界面设计说明。
-除了Ren'Py内置特殊界面名称，语涵编译器还添加了几项，使转换后的界面包含一些处理逻辑，而不需要用户再添加代码。
+Ren'Py中有一些界面名称是特殊的。使用这些特殊界面名作为FairyGUI中的组件名称时，语涵编译器进行UI资源转换时将特殊处理，添加额外代码和逻辑。
+
 目前所有特殊界面名称如下：
 
-1. 菜单类界面名称，会添加 tag menu。
+1. 菜单类界面名称，会添加**tag menu**。
 main_menu, game_menu, save, load, preferences, history, help, about
 
-2. 模态类界面名称，会添加 Modal True。
+2. 模态类界面名称，会添加**modal True**。
 confirm
 
 3. 选项分支界面。
@@ -45,7 +45,9 @@ history, history_item
 7. 图鉴类界面
 gallery, music_room
 
-不使用特殊界面名称创建的FairyGUI组件将按照下列步骤转换为Ren'Py的界面：
+详见 [renpy特殊界面设计说明](./renpy_special_screen_design_introduction.md)。
+
+非特殊界面名称的FairyGUI组件将按照下列步骤转换为Ren'Py的界面：
 
 1. 根据组件中的“控制器“，生成界面控制变量和辅助函数。
 2. 根据组件的“溢出处理”类型，决定是否需要一层viewport来限制显示范围。
@@ -84,6 +86,9 @@ screen save_slot_button(title='', actions=NullAction(), icon=Null()):
 ```
 use save_slot_button(title=FileTime(1, format=_("{#file_time}%Y-%m-%d %H:%M"), empty=_('')), actions=FileAction(1), icon=FileScreenshot(1))
 ```
+
+具体详见[FairyGUI的按钮与转换逻辑](./ui_component_button.md)。
+
 ## FairyGUI滑动条 -> Ren'Py样式
 
 FairyGUI中扩展类型为“Slider”的组件是滑动条。
@@ -114,9 +119,7 @@ style horizontal_slider:
 bar value Preference('main volume') style 'horizontal_slider'
 ```
 
-??? note "最终效果的一点区别"
-
-   FairyGUI中的滑动条active部分的尺寸变化使用缩放，Ren'Py中则是裁剪。
+具体详见[FairyGUI的滑动条与转换逻辑](./ui_component_slider.md)。
 
 ## FairyGUI滚动条 -> Ren'Py样式
 
@@ -140,4 +143,5 @@ vbar:
     style 'vertical_scrollbar'
 ```
 
+具体详见[FairyGUI的滚动条与转换逻辑](./ui_component_scrollbar.md)。
 
