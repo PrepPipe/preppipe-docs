@@ -252,12 +252,12 @@ Ren'Py中类似功能的实现通过文本标签系统，语法、效果等与Fa
 
 ### 输入变量
 
-输入文本需要有对应的变量来保存输入结果。目前转换器会根据输入文本控件名称添加后缀 _input_value** 在Ren'Py界面中生成一个ScreenVariableInputValue变量并用于界面内input组件的value特性。若需要将输入变量与全局变量做绑定，在FairyGUI编辑器中将输入文本控件的自定义数据设置为全局变量名即可。注意，此处设置的全局变量将生成在 *preppipe_global_variables.rpy* 文件中，并且默认值为FairyGUI编辑器中输入文本编辑框里的内容，请勿重复定义全局变量。
+输入文本需要有对应的变量来保存输入结果。目前转换器会根据输入文本控件名称添加后缀 *_input_value*，在Ren'Py界面中生成一个ScreenVariableInputValue变量并用于界面内input组件的value特性。若需要将输入变量与全局变量做绑定，在FairyGUI编辑器中将输入文本控件的自定义数据设置为需要的全局变量名即可。注意，此处设置的全局变量将生成在 *preppipe_global_variables.rpy* 文件中，并且默认值为FairyGUI编辑器中输入文本编辑框里的内容，请勿重复定义全局变量。
 
 ### Ren'Py原生input组件的交互限制
 
 如果在Ren'Py的某个界面中直接添加*input*组件，该组件将始终获得输入焦点。如果同一界面中包含多个*input*组件，只有界面代码中最后添加的组件能获得输入焦点。
-因此，转换器在处理FairyGUI普通组件(非按钮等)时，会将输入文本转换为Ren'Py界面代码的**button+input**形式，点击输入文本区域后才使input组件获得输入焦点；同时在整个Ren'Py界面上层覆盖一个dismiss组件，点击后使input组件关联的变量被禁用，实现input组件失去输入焦点的效果。
+因此，转换器在处理FairyGUI普通组件(非按钮等)时，会将输入文本转换为Ren'Py界面代码的**button+input**形式，点击输入文本区域后才使input组件获得输入焦点；同时在整个Ren'Py界面顶层覆盖一个dismiss组件，点击后使input组件关联的变量被禁用，实现input组件失去输入焦点的效果。
 
 ### 文本控件通用属性
 
@@ -428,7 +428,7 @@ FariyGUI绘制多边形时使用 *VertexBuffer* 存储网格顶点。在顶点�
 
 转换器处理“边缘留空”，对应Ren'Py中的margin特性。
 
-FairyGUI中的*边缘虚化*效果,在Ren'Py中使用着色器实现。效果与FairyGUI编辑器的预览效果略有差异，虚化效果更明显，建议将该设置设置的略微小一些，比如50。
+FairyGUI中的*边缘虚化*效果,在Ren'Py中使用着色器实现。Ren'Py运行效果与FairyGUI编辑器的预览效果略有差异，虚化效果更明显，建议将该设置设置的略微小一些，比如50。
 
 ### 树视图
 
