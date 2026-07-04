@@ -4,6 +4,7 @@
 
 组件FairyGUI中的基础容器。UI资源转换器一般会把组件转换为Ren'Py中的界面(screen)。
 组件有一些基础属性，可以设置组件大小和可见区域。
+
 ![组件基础属性](screenshots\fguieditor\component_attributes.png)
 
 ### 尺寸

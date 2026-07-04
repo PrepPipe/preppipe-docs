@@ -13,6 +13,7 @@ UI资源转换器会根据FairyGUI的下拉框生成一个具有相似功能的�
 ## 创建下拉框
 
 在FairyGUI编辑器中通过功能菜单“资源->新建下拉框”或快捷按钮可以创建下拉框，弹出“创建下拉框”提示窗口：
+
 ![创建下拉框](screenshots\fguieditor\create_combobox.png)
 
 根据提示逐步设置各部分的图片资源即可创建。
@@ -46,6 +47,7 @@ UI资源转换器会根据FairyGUI的下拉框生成一个具有相似功能的�
 ## FairyGUI编辑器舞台的下拉框属性
 
 在其他普通组件的编辑舞台中，可以直接拖入设计完成的下拉框组件，生成一个下拉框实例。FairyGUI的下拉框实例具有下拉框实例属性。
+
 ![按下拉框实例属性](screenshots\fguieditor\combobox_attributes.png)
 
 ### 标题

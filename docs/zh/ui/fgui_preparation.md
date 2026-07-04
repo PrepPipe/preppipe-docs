@@ -9,9 +9,11 @@
 ### 项目设置
 
 新建或打开已存在的项目后，点击菜单栏“文件->项目设置”：
+
 ![项目设置菜单](screenshots/fguieditor/menu_project_setting.png)
 
 在弹出的“项目设置”弹窗中，将项目类型设置为“Unity”，即默认值。语涵编译器的“UI资源转换”功能基于此类型的资源开发。为保证转换后尽可能保证UI效果的一致性，建议不要修改为其他类型。
+
 ![项目类型设置](screenshots/fguieditor/project_setting_base.png)
 
 ### 发布设置

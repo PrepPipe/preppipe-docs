@@ -13,6 +13,7 @@ Ren'Py中的滑动条只是具有*thumb*样式特性的bar。其中的滑块并�
 ## 创建滑动条
 
 在FairyGUI编辑器中通过功能菜单“资源->新建滑动条”或快捷按钮可以创建滚动条，弹出“创建滑动条”提示窗口：
+
 ![创建滚动条](screenshots\fguieditor\create_slider.png)
 
 其中的“标题类型”不会被UI转换器处理。我们建议需要显示滑动条关联数值的组件中使用独立的标签组件或文本控件，在FairyGUI中设计文本样式，转换为Ren'Py代码后手动将固定文本改为变量相关的表达式。
@@ -33,9 +34,11 @@ Ren'Py中的滑动条只是具有*thumb*样式特性的bar。其中的滑块并�
 ### 前景图片的差异
 
 FairyGUI对滑动条前景的处理方式为缩放。以水平滑动条为例，滑块移动到滑动条中间时，前景图在水平方向上缩小为原长度的一半。
+
 ![FairyGUI中的滑动条前景缩放](screenshots\fguieditor\fairygui_slider_foreground_screenshot.png)
 
 Ren'Py对滑动条前景的默认处理方式为剪裁。以水平滑动条为例，滑块移动到滑动条中间时。前景图只截取显示左边一半。
+
 ![Ren'Py中的滑动条前景缩放](screenshots\fguieditor\renpy_slider_foreground_screenshot.png)
 
 为了尽量使FairyGUI编辑器预览效果与转换后的Ren'Py运行结果一致，UI资源转换器会根据滑动条的前景和背景图片生成Ren'Py中的Frame对象，并将bar的*bar_resizing*样式特性值改为True。

@@ -29,6 +29,7 @@ UI资源转换器目前只支持装载器类型的“icon”，不支持其他�
 ## FairyGUI编辑器舞台的标签属性
 
 在其他普通组件的编辑舞台中，可以直接拖入设计完成的标签组件，生成一个标签实例。FairyGUI的标签实例具有标签实例属性。
+
 ![按标签实例属性](screenshots\fguieditor\label_attributes.png)
 
 ### 标题
