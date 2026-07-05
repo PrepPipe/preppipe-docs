@@ -440,6 +440,8 @@ FariyGUI绘制多边形时使用 *VertexBuffer* 存储网格顶点。在顶点�
 
     FairyGUI中的列表可以选择只允许在水平或垂直方向滚动，但Ren'Py中的viewport或vpgrid无法实现相同效果。Ren'Py原生也不支持边缘回弹效果和边缘虚化。因此，我们使用自定义组件elastic_viewport和自定义变换dynamic_edge_virtualization实现了类似效果。
 
+**elastic_viewport**的说明详见[自定义视口](./ui_renpy_cdd.md#elastic_viewport)部分。
+
 点击溢出处理右侧的齿轮按钮会弹出二级选项。“滚动条组件”下可以指定垂直滚动条和水平滚动条，**其他未说明的设置项都不会在最终Ren'Py项目生效**。
 
 ### 渲染顺序、选择模式、选择控制、分页控制
